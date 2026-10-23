@@ -7,16 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model USUARIO {
+model Usuario {
   id_usuario Int    @id @default(autoincrement())
   nome       String @db.VarChar(100)
   email      String @unique @db.VarChar(100)
   senha      String @db.VarChar(100)
 
-  movimentacoes MOVIMENTACAO_ESTOQUE[]
+  movimentacoes Movimentacao[]
+
+  @@map("USUARIO")
 }
 
-model DISCO {
+model Disco {
   id_disco           Int     @id @default(autoincrement())
   titulo             String  @db.VarChar(150)
   artista            String  @db.VarChar(100)
@@ -24,10 +26,12 @@ model DISCO {
   quantidade_estoque Int
   estoque_minimo     Int
 
-  movimentacoes MOVIMENTACAO_ESTOQUE[]
+  movimentacoes Movimentacao[]
+
+  @@map("DISCO")
 }
 
-model MOVIMENTACAO_ESTOQUE {
+model Movimentacao {
   id_movimentacao   Int      @id @default(autoincrement())
   id_disco          Int
   id_usuario        Int
@@ -36,6 +40,8 @@ model MOVIMENTACAO_ESTOQUE {
   data_movimentacao DateTime @db.Date
   observacao        String   @db.VarChar(250)
 
-  disco   DISCO   @relation(fields: [id_disco], references: [id_disco])
-  usuario USUARIO @relation(fields: [id_usuario], references: [id_usuario])
+  disco   Disco   @relation(fields: [id_disco], references: [id_disco])
+  usuario Usuario @relation(fields: [id_usuario], references: [id_usuario])
+
+  @@map("MOVIMENTACAO_ESTOQUE")
 }

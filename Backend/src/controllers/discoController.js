@@ -1,11 +1,14 @@
 
 const prisma = require("../prisma");
 
+
 async function listarDiscos(req, res) {
     try {
         const busca = req.query.busca;
 
-        const discos = await prisma.DISCO.findMany({
+        console.log("Busca recebida:", busca);
+
+        const discos = await prisma.disco.findMany({
             where: busca
                 ? {
                     OR: [
@@ -21,12 +24,14 @@ async function listarDiscos(req, res) {
 
         res.json(discos);
     } catch (erro) {
-        console.error(erro);
+        console.error("Erro detalhado ao buscar discos:", erro);
+
         res.status(500).json({
             mensagem: "Erro ao buscar discos."
         });
     }
 }
+
 
 async function cadastrarDisco(req, res) {
     const {
@@ -67,7 +72,7 @@ async function cadastrarDisco(req, res) {
     }
 
     try {
-        const disco = await prisma.DISCO.create({
+        const disco = await prisma.disco.create({
             data: {
                 titulo: titulo.trim(),
                 artista: artista.trim(),
@@ -128,7 +133,7 @@ async function editarDisco(req, res) {
     }
 
     try {
-        const disco = await prisma.DISCO.update({
+        const disco = await prisma.disco.update({
             where: {
                 id_disco: id
             },
@@ -154,7 +159,13 @@ async function excluirDisco(req, res) {
     const id = Number(req.params.id);
 
     try {
-        await prisma.DISCO.delete({
+        await prisma.movimentacao.deleteMany({
+            where: {
+                id_disco: id
+            }
+        });
+
+        await prisma.disco.delete({
             where: {
                 id_disco: id
             }
@@ -166,17 +177,17 @@ async function excluirDisco(req, res) {
     } catch (erro) {
         console.error(erro);
         res.status(500).json({
-            mensagem: "Erro ao excluir disco. Verifique se existem movimentações vinculadas."
+            mensagem: "Erro ao excluir disco."
         });
     }
 }
 
 async function listarEstoqueBaixo(req, res) {
     try {
-        const discos = await prisma.DISCO.findMany();
+        const discos = await prisma.disco.findMany();
 
         const estoqueBaixo = discos.filter((disco) => {
-            return disco.quantidade_estoque <= disco.estoque_minimo;
+            return disco.quantidade_estoque < disco.estoque_minimo;
         });
 
         res.json(estoqueBaixo);

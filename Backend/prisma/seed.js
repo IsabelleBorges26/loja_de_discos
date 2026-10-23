@@ -4,11 +4,11 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-    await prisma.MOVIMENTACAO_ESTOQUE.deleteMany();
-    await prisma.DISCO.deleteMany();
-    await prisma.USUARIO.deleteMany();
+    await prisma.movimentacao.deleteMany();
+    await prisma.disco.deleteMany();
+    await prisma.usuario.deleteMany();
 
-    await prisma.USUARIO.createMany({
+    await prisma.usuario.createMany({
         data: [
             { nome: "Ana Souza", email: "ana@loja.com", senha: "123456" },
             { nome: "Bruno Lima", email: "bruno@loja.com", senha: "123456" },
@@ -16,7 +16,7 @@ async function main() {
         ]
     });
 
-    await prisma.DISCO.createMany({
+    await prisma.disco.createMany({
         data: [
             { titulo: "The Dark Side of the Moon", artista: "Pink Floyd", preco_custo: 89.90, quantidade_estoque: 8, estoque_minimo: 3 },
             { titulo: "Abbey Road", artista: "The Beatles", preco_custo: 79.90, quantidade_estoque: 2, estoque_minimo: 3 },
@@ -26,10 +26,10 @@ async function main() {
         ]
     });
 
-    const discos = await prisma.DISCO.findMany({ orderBy: { id_disco: "asc" } });
-    const usuarios = await prisma.USUARIO.findMany({ orderBy: { id_usuario: "asc" } });
+    const discos = await prisma.disco.findMany({ orderBy: { id_disco: "asc" } });
+    const usuarios = await prisma.usuario.findMany({ orderBy: { id_usuario: "asc" } });
 
-    await prisma.MOVIMENTACAO_ESTOQUE.createMany({
+    await prisma.movimentacao.createMany({
         data: [
             { id_disco: discos[0].id_disco, id_usuario: usuarios[0].id_usuario, tipo_movimentacao: "entrada", quantidade: 10, data_movimentacao: new Date("2026-10-01"), observacao: "Compra do fornecedor" },
             { id_disco: discos[0].id_disco, id_usuario: usuarios[1].id_usuario, tipo_movimentacao: "saida", quantidade: 2, data_movimentacao: new Date("2026-10-05"), observacao: "Venda no balcão" },

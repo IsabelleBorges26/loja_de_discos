@@ -10,7 +10,7 @@ async function cadastrarUsuario(req, res) {
     }
 
     try {
-        const usuarioExiste = await prisma.USUARIO.findUnique({
+        const usuarioExiste = await prisma.usuario.findUnique({
             where: {
                 email: email
             }
@@ -22,7 +22,7 @@ async function cadastrarUsuario(req, res) {
             });
         }
 
-        const usuario = await prisma.USUARIO.create({
+        const usuario = await prisma.usuario.create({
             data: {
                 nome: nome,
                 email: email,
@@ -44,7 +44,7 @@ async function cadastrarUsuario(req, res) {
 
 async function listarUsuarios(req, res) {
     try {
-        const usuarios = await prisma.USUARIO.findMany({
+        const usuarios = await prisma.usuario.findMany({
             select: {
                 id_usuario: true,
                 nome: true,
@@ -70,7 +70,7 @@ async function loginUsuario(req, res) {
     }
 
     try {
-        const usuario = await prisma.USUARIO.findUnique({
+        const usuario = await prisma.usuario.findUnique({
             where: {
                 email: email
             }

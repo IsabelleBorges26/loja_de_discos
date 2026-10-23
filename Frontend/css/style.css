@@ -11,14 +11,12 @@ body {
     text-align: center;
 }
 
-/* Títulos */
 h1, h2, h3 {
     color: #173B27;
     font-family: Georgia, serif;
     text-align: center;
 }
 
-/* Formulários centralizados */
 form {
     background-color: white;
     width: 100%;
@@ -30,7 +28,6 @@ form {
     text-align: center;
 }
 
-/* Campos de texto e seleção */
 label {
     display: block;
     margin: 12px auto 5px;
@@ -50,7 +47,6 @@ textarea {
     color: #173B27;
 }
 
-/* Botões */
 button {
     display: inline-block;
     background-color: #173B27;
@@ -75,7 +71,6 @@ button[type="submit"]:hover {
     background-color: #d88908;
 }
 
-/* Links */
 a {
     color: #173B27;
     text-decoration: none;
@@ -85,7 +80,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Tabelas centralizadas */
 table {
     width: 100%;
     max-width: 1000px;
@@ -110,7 +104,6 @@ tr:nth-child(even) {
     background-color: #F8F0E3;
 }
 
-/* Barra de pesquisa */
 #campoBusca {
     display: block;
     width: 100%;
@@ -118,14 +111,12 @@ tr:nth-child(even) {
     margin: 15px auto;
 }
 
-/* Mensagens */
 #loginMensagem,
 #movMensagem {
     text-align: center;
     color: #173B27;
 }
 
-/* Linhas divisórias */
 hr {
     border: none;
     border-top: 1px solid #173B27;
@@ -133,7 +124,6 @@ hr {
     max-width: 1000px;
 }
 
-/* Centralização do login */
 #loginForm {
     margin: 40px auto;
     max-width: 400px;
@@ -149,7 +139,6 @@ hr {
     margin: 20px auto 0;
 }
 
-/* Ajustes para celulares */
 @media (max-width: 600px) {
     body {
         padding: 10px;

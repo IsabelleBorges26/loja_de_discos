@@ -2,7 +2,7 @@ const prisma = require("../prisma");
 
 async function listarMovimentacoes(req, res) {
     try {
-        const movimentacoes = await prisma.MOVIMENTACAO_ESTOQUE.findMany({
+        const movimentacoes = await prisma.movimentacao.findMany({
             include: {
                 disco: true,
                 usuario: true
@@ -14,6 +14,7 @@ async function listarMovimentacoes(req, res) {
 
         res.json(movimentacoes);
     } catch (erro) {
+        console.error(erro);
         res.status(500).json({
             mensagem: "Erro ao buscar movimentações."
         });
@@ -32,7 +33,7 @@ async function cadastrarMovimentacao(req, res) {
     } = req.body;
 
     if (!id_disco || !id_usuario || !tipo_movimentacao ||
-        !quantidade || !data_movimentacao || !observacao) {
+        !quantidade || !data_movimentacao) {
         return res.status(400).json({
             mensagem: "Preencha todos os campos."
         });
@@ -60,7 +61,7 @@ async function cadastrarMovimentacao(req, res) {
     }
 
     try {
-        const disco = await prisma.DISCO.findUnique({
+        const disco = await prisma.disco.findUnique({
             where: {
                 id_disco: Number(id_disco)
             }
@@ -72,7 +73,7 @@ async function cadastrarMovimentacao(req, res) {
             });
         }
 
-        const usuario = await prisma.USUARIO.findUnique({
+        const usuario = await prisma.usuario.findUnique({
             where: {
                 id_usuario: Number(id_usuario)
             }
@@ -100,7 +101,7 @@ async function cadastrarMovimentacao(req, res) {
         }
 
         const movimentacao = await prisma.$transaction(async (tx) => {
-            await tx.DISCO.update({
+            await tx.disco.update({
                 where: {
                     id_disco: Number(id_disco)
                 },
@@ -109,14 +110,14 @@ async function cadastrarMovimentacao(req, res) {
                 }
             });
 
-            return await tx.MOVIMENTACAO_ESTOQUE.create({
+            return await tx.movimentacao.create({
                 data: {
                     id_disco: Number(id_disco),
                     id_usuario: Number(id_usuario),
                     tipo_movimentacao,
                     quantidade: qtd,
                     data_movimentacao: data,
-                    observacao
+                    observacao: observacao || ""
                 }
             });
         });
@@ -124,11 +125,12 @@ async function cadastrarMovimentacao(req, res) {
         res.status(201).json({
             mensagem: "Movimentação registrada com sucesso.",
             movimentacao,
-            alerta_estoque: novoEstoque <= disco.estoque_minimo
-                ? "Atenção: o estoque está abaixo ou igual ao mínimo."
+            alerta_estoque: tipo_movimentacao === "saida" && novoEstoque < disco.estoque_minimo
+                ? "Atenção: o estoque de \"" + disco.titulo + "\" ficou abaixo do mínimo (" + novoEstoque + " de no mínimo " + disco.estoque_minimo + ")."
                 : null
         });
     } catch (erro) {
+        console.error(erro);
         res.status(500).json({
             mensagem: "Erro ao registrar movimentação."
         });

@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <h1>Controle de Estoque</h1>
+    <h1>Gestão de Acervo e Vendas</h1>
 
     <p><a href="dashboard.html">Voltar ao painel</a></p>
     <button id="sairBtn">Sair</button>
@@ -17,23 +17,23 @@
     <h2>Registrar movimentação</h2>
 
     <form id="movimentacaoForm">
-        <label>Disco:</label>
-        <select id="produto" required></select>
+        <label for="disco">Disco:</label>
+        <select id="disco" required></select>
 
-        <label>Tipo:</label>
+        <label for="tipo">Tipo de movimentação:</label>
         <select id="tipo">
-            <option value="entrada">Entrada</option>
-            <option value="saida">Saída</option>
+            <option value="entrada">Reposição / Compra (entrada)</option>
+            <option value="saida">Venda (saída)</option>
         </select>
 
-        <label>Quantidade:</label>
-        <input type="number" id="quantidadeMov" min="1" required>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" min="1" step="1" required>
 
-        <label>Responsável:</label>
-        <input type="text" id="responsavel">
+        <label for="data">Data da movimentação:</label>
+        <input type="date" id="data" required>
 
-        <label>Observação:</label>
-        <input type="text" id="observacao">
+        <label for="observacao">Observação:</label>
+        <input type="text" id="observacao" maxlength="250">
 
         <button type="submit">Registrar</button>
     </form>
@@ -42,7 +42,7 @@
 
     <hr>
 
-    <h2>Estoque atual</h2>
+    <h2>Acervo (ordem alfabética)</h2>
 
     <table>
         <thead>
