@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>BELIÊ - Estoque</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <h1>Controle de Estoque</h1>
+
+    <p><a href="dashboard.html">Voltar ao painel</a></p>
+    <button id="sairBtn">Sair</button>
+
+    <hr>
+
+    <h2>Registrar movimentação</h2>
+
+    <form id="movimentacaoForm">
+        <label>Disco:</label>
+        <select id="produto" required></select>
+
+        <label>Tipo:</label>
+        <select id="tipo">
+            <option value="entrada">Entrada</option>
+            <option value="saida">Saída</option>
+        </select>
+
+        <label>Quantidade:</label>
+        <input type="number" id="quantidadeMov" min="1" required>
+
+        <label>Responsável:</label>
+        <input type="text" id="responsavel">
+
+        <label>Observação:</label>
+        <input type="text" id="observacao">
+
+        <button type="submit">Registrar</button>
+    </form>
+
+    <p id="movMensagem"></p>
+
+    <hr>
+
+    <h2>Estoque atual</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Disco</th>
+                <th>Artista</th>
+                <th>Quantidade</th>
+                <th>Mínimo</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        <tbody id="listaEstoque"></tbody>
+    </table>
+
+    <hr>
+
+    <h2>Histórico de movimentações</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Disco</th>
+                <th>Tipo</th>
+                <th>Quantidade</th>
+                <th>Responsável</th>
+            </tr>
+        </thead>
+        <tbody id="listaMovimentacoes"></tbody>
+    </table>
+
+    <script src="../js/producao.js"></script>
+</body>
+</html>

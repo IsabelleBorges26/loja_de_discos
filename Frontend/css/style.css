@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F8F0E3;
+    color: #173B27;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    color: #173B27;
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+/* Formulários centralizados */
+form {
+    background-color: white;
+    width: 100%;
+    max-width: 400px;
+    margin: 25px auto;
+    padding: 25px;
+    border: 1px solid #173B27;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Campos de texto e seleção */
+label {
+    display: block;
+    margin: 12px auto 5px;
+    text-align: left;
+}
+
+input,
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 8px auto 15px;
+    border: 1px solid #173B27;
+    border-radius: 4px;
+    background-color: white;
+    color: #173B27;
+}
+
+/* Botões */
+button {
+    display: inline-block;
+    background-color: #173B27;
+    color: white;
+    padding: 10px 18px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #28563B;
+}
+
+button[type="submit"] {
+    background-color: #E99A12;
+    color: #173B27;
+}
+
+button[type="submit"]:hover {
+    background-color: #d88908;
+}
+
+/* Links */
+a {
+    color: #173B27;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tabelas centralizadas */
+table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 25px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th,
+td {
+    border: 1px solid #173B27;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #173B27;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #F8F0E3;
+}
+
+/* Barra de pesquisa */
+#campoBusca {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto;
+}
+
+/* Mensagens */
+#loginMensagem,
+#movMensagem {
+    text-align: center;
+    color: #173B27;
+}
+
+/* Linhas divisórias */
+hr {
+    border: none;
+    border-top: 1px solid #173B27;
+    margin: 25px auto;
+    max-width: 1000px;
+}
+
+/* Centralização do login */
+#loginForm {
+    margin: 40px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+#loginForm input {
+    width: 100%;
+}
+
+#loginForm button {
+    display: block;
+    margin: 20px auto 0;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    form {
+        padding: 18px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 6px;
+    }
+}
